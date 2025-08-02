@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TaskResponse {
     private Long id;
+    private String title;
     private String description;
     private Status status;
     private LocalDateTime createdAt;
