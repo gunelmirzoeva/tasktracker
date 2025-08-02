@@ -3,6 +3,7 @@ package com.example.tasktracker.entity;
 import com.example.tasktracker.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "tasks")
+@Builder
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +32,8 @@ public class Task {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status;
+    @Builder.Default
+    private Status status = Status.TODO;
 
     @CreatedDate
     @Column(updatable = false)
