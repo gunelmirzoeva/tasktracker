@@ -59,26 +59,17 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskResponse markAsInProgress(Long id) {
-        Task existingTask = taskRepository.findById(id)
+    public TaskResponse updateStatus(Long id, Status status) {
+        Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + id));
 
-        existingTask.setStatus(Status.IN_PROGRESS);
-        existingTask.setUpdatedAt(LocalDateTime.now());
+        task.setStatus(status);
+        task.setUpdatedAt(LocalDateTime.now());
 
-        return taskMapper.toResponse(taskRepository.save(existingTask));
+        return taskMapper.toResponse(taskRepository.save(task));
     }
 
-    @Override
-    public TaskResponse markAsDone(Long id) {
-        Task existingTask = taskRepository.findById(id)
-                .orElseThrow(() -> new TaskNotFoundException("Task not found with id: " + id));
 
-        existingTask.setStatus(Status.DONE);
-        existingTask.setUpdatedAt(LocalDateTime.now());
-
-        return taskMapper.toResponse(taskRepository.save(existingTask));
-    }
 
     @Override
     public List<TaskResponse> listAllTasks() {

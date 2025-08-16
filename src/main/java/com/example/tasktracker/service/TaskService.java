@@ -13,9 +13,7 @@ public interface TaskService {
 
     void deleteTask(Long id);
 
-    TaskResponse markAsInProgress(Long id);
-
-    TaskResponse markAsDone(Long id);
+    TaskResponse updateStatus(Long id, Status status);
 
     List<TaskResponse> listAllTasks();
 
